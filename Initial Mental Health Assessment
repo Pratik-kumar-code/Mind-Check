@@ -1,0 +1,9 @@
+from django.db import models
+from accounts.models import User
+
+class Assessment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    mood_level = models.IntegerField()   # 1–10
+    stress_level = models.IntegerField() # 1–10
+    sleep_hours = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
