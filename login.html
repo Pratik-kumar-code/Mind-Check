@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Mental Health Dashboard</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, sans-serif;
+    }
+
+    body{
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:#f4f7fb;
+    }
+
+    .login-container{
+      width:350px;
+      background:white;
+      padding:30px;
+      border-radius:10px;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .login-container h2{
+      text-align:center;
+      margin-bottom:20px;
+      color:#333;
+    }
+
+    .input-group{
+      margin-bottom:15px;
+    }
+
+    .input-group label{
+      display:block;
+      margin-bottom:5px;
+      color:#555;
+    }
+
+    .input-group input{
+      width:100%;
+      padding:10px;
+      border:1px solid #ccc;
+      border-radius:5px;
+      outline:none;
+    }
+
+    .login-btn{
+      width:100%;
+      padding:10px;
+      background:#4a90e2;
+      color:white;
+      border:none;
+      border-radius:5px;
+      cursor:pointer;
+      font-size:16px;
+    }
+
+    .login-btn:hover{
+      background:#357abd;
+    }
+
+    .signup-text{
+      text-align:center;
+      margin-top:15px;
+    }
+
+    .signup-text a{
+      color:#4a90e2;
+      text-decoration:none;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="login-container">
+
+    <h2>Login</h2>
+
+    <form id="loginForm">
+
+      <div class="input-group">
+        <label>Email</label>
+
+        <input 
+          type="email" 
+          id="email" 
+          placeholder="Enter your email"
+          required 
+        />
+      </div>
+
+      <div class="input-group">
+        <label>Password</label>
+
+        <input 
+          type="password" 
+          id="password" 
+          placeholder="Enter your password"
+          required 
+        />
+      </div>
+
+      <button type="submit" class="login-btn">
+        Login
+      </button>
+
+    </form>
+
+    <div class="signup-text">
+      Don't have an account?
+      <a href="register.html">Register</a>
+    </div>
+
+  </div>
+
+  <script>
+
+    const loginForm = document.getElementById("loginForm");
+
+    loginForm.addEventListener("submit", function(e){
+
+      e.preventDefault();
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      // Get registered user from localStorage
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+
+      // Check if user exists
+      if(!storedUser){
+
+        alert("Please register first");
+        return;
+      }
+
+      // Validate login
+      if(email === storedUser.email && password === storedUser.password){
+
+        alert("Login Successful");
+
+        // Redirect to dashboard
+        window.location.href = "dashboard.html";
+
+      } else {
+
+        alert("Invalid Email or Password");
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>

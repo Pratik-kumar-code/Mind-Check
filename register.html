@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register - Mental Health Dashboard</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, sans-serif;
+    }
+
+    body{
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:#f4f7fb;
+    }
+
+    .register-container{
+      width:380px;
+      background:white;
+      padding:30px;
+      border-radius:10px;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .register-container h2{
+      text-align:center;
+      margin-bottom:20px;
+      color:#333;
+    }
+
+    .input-group{
+      margin-bottom:15px;
+    }
+
+    .input-group label{
+      display:block;
+      margin-bottom:5px;
+      color:#555;
+    }
+
+    .input-group input{
+      width:100%;
+      padding:10px;
+      border:1px solid #ccc;
+      border-radius:5px;
+      outline:none;
+    }
+
+    .register-btn{
+      width:100%;
+      padding:10px;
+      background:#4a90e2;
+      color:white;
+      border:none;
+      border-radius:5px;
+      cursor:pointer;
+      font-size:16px;
+    }
+
+    .register-btn:hover{
+      background:#357abd;
+    }
+
+    .login-text{
+      text-align:center;
+      margin-top:15px;
+    }
+
+    .login-text a{
+      color:#4a90e2;
+      text-decoration:none;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="register-container">
+
+  <h2>Create Account</h2>
+
+  <form id="registerForm">
+
+    <div class="input-group">
+      <label>Full Name</label>
+      <input type="text" id="name" required>
+    </div>
+
+    <div class="input-group">
+      <label>Email</label>
+      <input type="email" id="email" required>
+    </div>
+
+    <div class="input-group">
+      <label>Password</label>
+      <input type="password" id="password" required>
+    </div>
+
+    <div class="input-group">
+      <label>Confirm Password</label>
+      <input type="password" id="confirmPassword" required>
+    </div>
+
+    <button type="submit" class="register-btn">
+      Register
+    </button>
+
+  </form>
+
+  <div class="login-text">
+    Already have an account?
+    <a href="login.html">Login</a>
+  </div>
+
+</div>
+
+<script>
+
+  const registerForm = document.getElementById("registerForm");
+
+  registerForm.addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    if(password !== confirmPassword){
+
+      alert("Passwords do not match");
+      return;
+    }
+
+    // Save user in localStorage
+    const user = {
+      name,
+      email,
+      password
+    };
+
+    localStorage.setItem("user", JSON.stringify(user));
+
+    alert("Registration Successful");
+
+    // Redirect to login page
+    window.location.href = "login.html";
+
+  });
+
+</script>
+
+</body>
+</html>
