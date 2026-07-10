@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Settings | MindWell</title>
+
+    <link rel="stylesheet" href="css/settings.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+            🌿 MindWell
+        </div>
+
+        <ul>
+
+            <li><a href="admindashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+
+            <li><a href="user.html"><i class="fa-solid fa-users"></i> Users</a></li>
+
+            <!-- <li><a href="journals.html"><i class="fa-solid fa-book"></i> Journals</a></li> -->
+
+            <li><a href="therapists.html"><i class="fa-solid fa-user-doctor"></i> Therapists</a></li>
+
+            <li><a href="reports.html"><i class="fa-solid fa-chart-line"></i> Reports</a></li>
+
+            <li class="active"><a href="#"><i class="fa-solid fa-gear"></i> Settings</a></li>
+
+            <li><a href="#"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+
+        </ul>
+
+    </div>
+
+    <!-- Main -->
+
+    <div class="main">
+
+        <div class="topbar">
+
+            <h1>Settings</h1>
+
+            <div class="admin">
+
+                <img id="adminImage" src="images/admin.png" alt="Admin">
+
+                <span>Administrator</span>
+
+            </div>
+
+        </div>
+
+        <!-- Profile -->
+
+        <div class="card">
+
+            <h2><i class="fa-solid fa-user"></i> Admin Profile</h2>
+
+            <div class="form-grid">
+
+                <div>
+                    <label>Full Name</label>
+                    <input id="name" type="text" placeholder="Enter Name">
+                </div>
+
+                <div>
+                    <label>Email</label>
+                    <input id="email" type="email" placeholder="Enter Email">
+                </div>
+
+                <div>
+                    <label>Phone</label>
+                    <input id="phone" type="text" placeholder="Enter Phone">
+                </div>
+
+                <div>
+                    <label>Profile Image</label>
+                    <input id="profileImage" type="file">
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Password -->
+
+        <div class="card">
+
+            <h2><i class="fa-solid fa-lock"></i> Change Password</h2>
+
+            <div class="form-grid">
+
+                <div>
+                    <label>Current Password</label>
+                    <input id="currentPassword" type="password">
+                </div>
+
+                <div>
+                    <label>New Password</label>
+                    <input id="newPassword" type="password">
+                </div>
+
+                <div>
+                    <label>Confirm Password</label>
+                    <input id="confirmPassword" type="password">
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Website -->
+
+        <div class="card">
+
+            <h2><i class="fa-solid fa-globe"></i> Website Settings</h2>
+
+            <div class="form-grid">
+
+                <div>
+                    <label>Website Name</label>
+                    <input id="websiteName" type="text">
+                </div>
+
+                <div>
+                    <label>Support Email</label>
+                    <input id="supportEmail" type="email">
+                </div>
+
+                <div>
+                    <label>Contact Number</label>
+                    <input id="contactNumber" type="text">
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Notifications -->
+
+        <div class="card">
+
+            <h2><i class="fa-solid fa-bell"></i> Notifications</h2>
+
+            <div class="toggle">
+
+                <label>Email Notifications</label>
+
+                <input id="emailNotifications" type="checkbox">
+
+            </div>
+
+            <div class="toggle">
+
+                <label>New User Alerts</label>
+
+                <input id="newUserAlerts" type="checkbox">
+
+            </div>
+
+            <div class="toggle">
+
+                <label>Therapist Requests</label>
+
+                <input id="therapistRequests" type="checkbox">
+
+            </div>
+
+            <div class="toggle">
+
+                <label>Feedback Alerts</label>
+
+                <input id="feedbackAlerts" type="checkbox">
+
+            </div>
+
+        </div>
+
+        <!-- Theme -->
+
+        <div class="card">
+
+            <h2><i class="fa-solid fa-palette"></i> Theme</h2>
+
+            <select id="theme">
+
+                <option value="Light">Light</option>
+
+                <option value="Dark">Dark</option>
+
+                <option value="System Default">System Default</option>
+
+            </select>
+
+        </div>
+
+        <!-- System -->
+
+        <div class="card">
+
+            <h2><i class="fa-solid fa-circle-info"></i> System Information</h2>
+
+            <p><strong>Application :</strong> MindWell</p>
+
+            <p><strong>Version :</strong> 1.0</p>
+
+            <p><strong>Database :</strong> MongoDB</p>
+
+            <p><strong>Server :</strong> Online</p>
+
+        </div>
+
+        <!-- Button -->
+
+        <div class="save">
+
+            <button id="saveBtn">
+
+                Save Changes
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <script src="js/settings.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>
+
+Appointment Details
+
+</title>
+
+<link
+rel="stylesheet"
+href="css/admin.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">
+
+🌿 MindWell
+
+</div>
+
+<ul>
+
+<!-- <li><a href="admin-dashboard.html">Dashboard</a></li> -->
+
+<li><a href="appointments.html">Appointments</a></li>
+
+</ul>
+
+</div>
+
+<div class="main">
+
+<div class="section">
+
+<h2>
+
+📅 Appointment Details
+
+</h2>
+
+<hr><br>
+
+<p>
+
+<b>Patient :</b>
+
+<span id="patient"></span>
+
+</p>
+
+<br>
+
+<p>
+
+<b>Email :</b>
+
+<span id="email"></span>
+
+</p>
+
+<br>
+
+<p>
+
+<b>Therapist :</b>
+
+<span id="therapist"></span>
+
+</p>
+
+<br>
+
+<p>
+
+<b>Date :</b>
+
+<span id="date"></span>
+
+</p>
+
+<br>
+
+<p>
+
+<b>Time :</b>
+
+<span id="time"></span>
+
+</p>
+
+<br>
+
+<p>
+
+<!-- <b>Reason :</b>
+
+<span id="reason"></span> -->
+
+</p>
+
+<br>
+
+<p>
+
+<!-- <b>Status :</b>
+
+<span id="status"></span>
+
+</p> -->
+
+<br><br>
+
+<button onclick="updateStatus('Approved')">
+
+Approve
+
+</button>
+
+<button onclick="updateStatus('Rejected')">
+
+Reject
+
+</button>
+
+<button onclick="updateStatus('Completed')">
+
+Complete
+
+</button>
+
+<button onclick="updateStatus('Cancelled')">
+
+Cancel
+
+</button>
+
+<button
+    onclick="deleteAppointment()"
+    style="background:red; color:white;">
+
+    🗑 Delete
+
+</button>
+
+<button onclick="history.back()">
+
+Back
+
+</button>
+
+</div>
+
+</div>
+
+<script src="js/appointment-details.js">
+
+</script>
+
+</body>
+
+</html>

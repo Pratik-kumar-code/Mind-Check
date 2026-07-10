@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Assessment Details</title>
+
+    <link rel="stylesheet" href="css/admin.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <div class="logo">
+        🌿 MindWell
+    </div>
+
+    <ul>
+
+        <li><a href="admindashboard.html">🏠 Dashboard</a></li>
+
+        <li><a href="assessments.html">📊 Assessments</a></li>
+
+    </ul>
+
+</div>
+
+<div class="main">
+
+<div class="section">
+
+<h2>📊 Assessment Details</h2>
+
+<hr><br>
+
+<p><b>Patient Name :</b> <span id="patient"></span></p>
+<br>
+
+<p><b>Email :</b> <span id="email"></span></p>
+<br>
+
+<p><b>Stress :</b> <span id="stress"></span></p>
+<br>
+
+<p><b>Anxiety :</b> <span id="anxiety"></span></p>
+<br>
+
+<p><b>Sleep :</b> <span id="sleep"></span></p>
+<br>
+
+<p><b>Happiness :</b> <span id="happiness"></span></p>
+<br>
+
+<p><b>Focus :</b> <span id="focus"></span></p>
+<br>
+
+<p><b>Motivation :</b> <span id="motivation"></span></p>
+<br>
+
+<p><b>Average Score :</b> <span id="average"></span></p>
+<br>
+
+<p><b>Risk Level :</b> <span id="risk"></span></p>
+<br>
+
+<p><b>Date :</b> <span id="date"></span></p>
+
+<br><br>
+
+<button onclick="history.back()">
+
+⬅ Back
+
+</button>
+
+<button
+onclick="deleteAssessment()"
+style="
+background:#dc3545;
+color:white;
+margin-left:10px;">
+
+🗑 Delete
+
+</button>
+</div>
+
+</div>
+
+<script src="js/assessment-details.js"></script>
+
+</body>
+
+</html>

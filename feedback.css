@@ -1,0 +1,344 @@
+/* ==========================
+   Google Font
+========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+/* ==========================
+   Body
+========================== */
+
+body{
+
+    background:linear-gradient(135deg,#2563eb,#60a5fa);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:100vh;
+
+    padding:30px;
+
+}
+
+/* ==========================
+   Card
+========================== */
+
+.card{
+
+    width:100%;
+
+    max-width:650px;
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:40px;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.2);
+
+    animation:fade .5s ease;
+
+}
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================
+   Logo
+========================== */
+
+.logo{
+
+    width:80px;
+
+    height:80px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:#e0f2fe;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:38px;
+
+    margin-bottom:20px;
+
+}
+
+/* ==========================
+   Heading
+========================== */
+
+h1{
+
+    text-align:center;
+
+    color:#1e3a8a;
+
+    margin-bottom:10px;
+
+}
+
+.subtitle{
+
+    text-align:center;
+
+    color:#64748b;
+
+    margin-bottom:35px;
+
+}
+
+/* ==========================
+   User Info
+========================== */
+
+.user-info{
+
+    background:#eff6ff;
+
+    border-left:5px solid #2563eb;
+
+    padding:15px 20px;
+
+    border-radius:12px;
+
+    margin-bottom:30px;
+
+}
+
+.user-info h3{
+
+    color:#1e3a8a;
+
+    margin-bottom:5px;
+
+}
+
+.user-info p{
+
+    color:#475569;
+
+}
+
+/* ==========================
+   Form
+========================== */
+
+.form-group{
+
+    margin-bottom:25px;
+
+}
+
+.form-group label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+    color:#334155;
+
+}
+
+textarea{
+
+    width:100%;
+
+    padding:15px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:12px;
+
+    resize:none;
+
+    font-size:15px;
+
+    transition:.3s;
+
+}
+
+textarea:focus{
+
+    border-color:#2563eb;
+
+    outline:none;
+
+    box-shadow:0 0 10px rgba(37,99,235,.2);
+
+}
+
+/* ==========================
+   Stars
+========================== */
+
+.stars{
+
+    display:flex;
+
+    gap:12px;
+
+    font-size:34px;
+
+    margin-top:5px;
+
+}
+
+.star{
+
+    color:#cbd5e1;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.star:hover{
+
+    transform:scale(1.2);
+
+}
+
+/* ==========================
+   Button
+========================== */
+
+button{
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 20px rgba(37,99,235,.25);
+
+}
+
+button i{
+
+    margin-right:8px;
+
+}
+
+/* ==========================
+   Responsive
+========================== */
+
+@media(max-width:768px){
+
+    .card{
+
+        padding:25px;
+
+    }
+
+    h1{
+
+        font-size:28px;
+
+    }
+
+    .stars{
+
+        justify-content:center;
+
+        font-size:30px;
+
+    }
+
+}
+
+@media(max-width:500px){
+
+    body{
+
+        padding:15px;
+
+    }
+
+    .card{
+
+        padding:20px;
+
+    }
+
+    .logo{
+
+        width:65px;
+
+        height:65px;
+
+        font-size:30px;
+
+    }
+
+    h1{
+
+        font-size:24px;
+
+    }
+
+}

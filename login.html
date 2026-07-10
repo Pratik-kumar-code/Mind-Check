@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login - Mental Health Dashboard</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0"/>
+
+  <title>Login - MindWell</title>
 
   <style>
 
@@ -11,72 +13,153 @@
       margin:0;
       padding:0;
       box-sizing:border-box;
-      font-family:Arial, sans-serif;
+      font-family:'Segoe UI',Tahoma,sans-serif;
     }
 
     body{
+
       height:100vh;
       display:flex;
       justify-content:center;
       align-items:center;
-      background:#f4f7fb;
+
+      background:
+      linear-gradient(
+        135deg,
+        #dfe9f3,
+        #ffffff
+      );
     }
 
     .login-container{
-      width:350px;
+
+      width:400px;
       background:white;
-      padding:30px;
-      border-radius:10px;
-      box-shadow:0 0 10px rgba(0,0,0,0.1);
+      padding:35px;
+      border-radius:20px;
+
+      box-shadow:
+      0 10px 25px rgba(0,0,0,0.1);
+
+      animation:fadeIn 1s ease;
+    }
+
+    .logo{
+
+      text-align:center;
+      font-size:45px;
+      margin-bottom:10px;
     }
 
     .login-container h2{
+
       text-align:center;
-      margin-bottom:20px;
-      color:#333;
+      margin-bottom:10px;
+      color:#4a6d5a;
+    }
+
+    .subtitle{
+
+      text-align:center;
+      color:#666;
+      margin-bottom:25px;
+      font-size:14px;
     }
 
     .input-group{
-      margin-bottom:15px;
+
+      margin-bottom:18px;
     }
 
     .input-group label{
+
       display:block;
-      margin-bottom:5px;
-      color:#555;
+      margin-bottom:6px;
+      color:#444;
+      font-weight:500;
     }
 
     .input-group input{
+
       width:100%;
-      padding:10px;
+      padding:12px;
       border:1px solid #ccc;
-      border-radius:5px;
+      border-radius:10px;
       outline:none;
+      font-size:15px;
+      transition:0.3s;
+    }
+
+    .input-group input:focus{
+
+      border-color:#4a90e2;
+
+      box-shadow:
+      0 0 8px rgba(74,144,226,0.3);
     }
 
     .login-btn{
+
       width:100%;
-      padding:10px;
-      background:#4a90e2;
+      padding:13px;
+
+      background:
+      linear-gradient(
+        90deg,
+        #4a90e2,
+        #6ab04c
+      );
+
       color:white;
       border:none;
-      border-radius:5px;
+      border-radius:10px;
       cursor:pointer;
       font-size:16px;
+      font-weight:bold;
+
+      transition:0.3s;
     }
 
     .login-btn:hover{
-      background:#357abd;
+
+      transform:scale(1.02);
+      opacity:0.95;
     }
 
     .signup-text{
+
       text-align:center;
-      margin-top:15px;
+      margin-top:18px;
+      color:#555;
     }
 
     .signup-text a{
+
       color:#4a90e2;
       text-decoration:none;
+      font-weight:bold;
+    }
+
+    .quote{
+
+      text-align:center;
+      margin-top:20px;
+      font-size:13px;
+      color:#777;
+      font-style:italic;
+    }
+
+    @keyframes fadeIn{
+
+      from{
+        opacity:0;
+        transform:translateY(20px);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
     }
 
   </style>
@@ -84,84 +167,162 @@
 
 <body>
 
-  <div class="login-container">
+<div class="login-container">
 
-    <h2>Login</h2>
+  <div class="logo">
+    🌿
+  </div>
 
-    <form id="loginForm">
+  <h2>
+    Welcome Back
+  </h2>
 
-      <div class="input-group">
-        <label>Email</label>
+  <p class="subtitle">
+    Login to continue your healing journey 💙
+  </p>
 
-        <input 
-          type="email" 
-          id="email" 
-          placeholder="Enter your email"
-          required 
-        />
-      </div>
+  <form id="loginForm">
 
-      <div class="input-group">
-        <label>Password</label>
+    <div class="input-group">
 
-        <input 
-          type="password" 
-          id="password" 
-          placeholder="Enter your password"
-          required 
-        />
-      </div>
+      <label>
+        Email Address
+      </label>
 
-      <button type="submit" class="login-btn">
-        Login
-      </button>
+      <input
+        type="email"
+        id="email"
+        placeholder="Enter your email"
+        required>
 
-    </form>
-
-    <div class="signup-text">
-      Don't have an account?
-      <a href="register.html">Register</a>
     </div>
+
+    <div class="input-group">
+
+      <label>
+        Password
+      </label>
+
+      <input
+        type="password"
+        id="password"
+        placeholder="Enter your password"
+        required>
+
+    </div>
+
+    <button
+      type="submit"
+      class="login-btn">
+
+      Login
+
+    </button>
+
+  </form>
+
+  <div class="signup-text">
+
+    Don't have an account?
+
+    <a href="register.html">
+      Register
+    </a>
 
   </div>
 
-  <script>
+  <div class="quote">
 
-    const loginForm = document.getElementById("loginForm");
+    “Every day is a fresh start 🌈”
 
-    loginForm.addEventListener("submit", function(e){
+  </div>
 
-      e.preventDefault();
+</div>
 
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+<script>
 
-      // Get registered user from localStorage
-      const storedUser = JSON.parse(localStorage.getItem("user"));
+const loginForm =
+document.getElementById("loginForm");
 
-      // Check if user exists
-      if(!storedUser){
+loginForm.addEventListener(
+  "submit",
+  async function(e){
 
-        alert("Please register first");
-        return;
-      }
+    e.preventDefault();
 
-      // Validate login
-      if(email === storedUser.email && password === storedUser.password){
+    const email =
+      document.getElementById("email").value;
 
-        alert("Login Successful");
+    const password =
+      document.getElementById("password").value;
 
-        // Redirect to dashboard
-        window.location.href = "dashboard.html";
+    try{
 
-      } else {
+      const response =
+        await fetch(
+          "http://localhost:5000/login",
+          {
+            method:"POST",
 
-        alert("Invalid Email or Password");
-      }
+            headers:{
+              "Content-Type":
+              "application/json"
+            },
 
-    });
+            body:JSON.stringify({
+              email,
+              password
+            })
+          }
+        );
 
-  </script>
+      const data =
+        await response.json();
+        console.log(data);
+
+  //    alert(data.message);
+
+     if(data.message === "Login Successful"){
+
+    localStorage.setItem(
+        "isLoggedIn",
+        "true"
+    );
+
+    localStorage.setItem(
+        "userName",
+        data.user.name
+    );
+
+    localStorage.setItem(
+        "userEmail",
+        data.user.email
+    );
+
+    localStorage.setItem(
+        "loggedUser",
+        JSON.stringify(data.user)
+    );
+
+    alert("Login Successful 💙");
+
+    window.location.href =
+        "dashboard.html";
+}
+    }
+
+    catch(error){
+
+      alert(
+        "Cannot connect to server"
+      );
+
+      console.log(error);
+    }
+
+});
+
+</script>
 
 </body>
 </html>

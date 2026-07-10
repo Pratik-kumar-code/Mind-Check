@@ -1,120 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mental Health Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MindWell Dashboard</title>
 
-  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
 
+    :root{
+
+      --bg-color:#f8f7f2;
+      --card-bg:#fffefb;
+      --text-main:#2d3436;
+      --accent-green:#96b3a2;
+      --accent-red:#b33939;
+      --border-color:#e0e0e0;
+      --shadow:0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    body.dark-mode{
+
+      --bg-color:#1a252f;
+      --card-bg:#2c3e50;
+      --text-main:#ecf0f1;
+      --accent-green:#4a6d5a;
+      --border-color:#34495e;
+      --shadow:0 4px 12px rgba(0,0,0,0.3);
+    }
+
     *{
+
       margin:0;
       padding:0;
       box-sizing:border-box;
-      font-family:Arial, sans-serif;
+      font-family:'Segoe UI',Tahoma,sans-serif;
+      transition:0.3s ease;
     }
 
     body{
-      background:#f4f7fb;
+
+      background-color:var(--bg-color);
+      color:var(--text-main);
     }
 
     header{
-      background:#4a90e2;
-      color:white;
-      padding:15px 30px;
+
       display:flex;
       justify-content:space-between;
       align-items:center;
+      padding:15px 40px;
+      background:var(--card-bg);
+      border-bottom:1px solid var(--border-color);
+      position:sticky;
+      top:0;
+      z-index:1000;
     }
 
-    header button{
+    .logo{
+
+      font-size:24px;
+      font-weight:bold;
+      color:var(--accent-green);
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    nav a{
+
+      margin:0 12px;
+      text-decoration:none;
+      color:var(--text-main);
+      font-weight:500;
+    }
+
+    nav a.active{
+
+      background:var(--accent-green);
+      color:white;
       padding:8px 15px;
-      border:none;
-      border-radius:5px;
-      margin-left:10px;
+      border-radius:8px;
+    }
+
+    .controls{
+
+      display:flex;
+      align-items:center;
+      gap:15px;
+    }
+
+    #theme-toggle{
+
       cursor:pointer;
-      background:white;
-      color:#4a90e2;
+      background:#ddd;
+      border:none;
+      border-radius:20px;
+      padding:8px 12px;
+      display:flex;
+      align-items:center;
+      gap:5px;
+      font-size:14px;
+    }
+
+    body.dark-mode #theme-toggle{
+
+      background:#444;
+      color:white;
+    }
+
+    .crisis-btn{
+
+      background:var(--accent-red);
+      color:white;
+      border:none;
+      padding:10px 15px;
+      border-radius:8px;
+      cursor:pointer;
       font-weight:bold;
     }
 
     .container{
-      width:90%;
-      max-width:1000px;
-      margin:30px auto;
+
+      display:grid;
+      grid-template-columns:1fr 2fr;
+      gap:25px;
+      padding:40px;
+      max-width:1400px;
+      margin:auto;
     }
 
-    .container h3{
-      margin-bottom:20px;
-      color:#333;
+    h1{
+
+      grid-column:span 2;
+      margin-bottom:10px;
     }
 
     .card{
-      background:white;
+
+      background:var(--card-bg);
+      border-radius:15px;
       padding:20px;
-      border-radius:10px;
-      margin-bottom:20px;
-      box-shadow:0 0 10px rgba(0,0,0,0.1);
+      box-shadow:var(--shadow);
+      border:1px solid var(--border-color);
     }
 
-    .card h4{
+    .card h3{
+
       margin-bottom:15px;
-      color:#444;
+    }
+
+    .resource-grid{
+
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:15px;
+    }
+
+    .resource-item{
+
+      background:var(--bg-color);
+      padding:15px;
+      border-radius:12px;
+      border:1px solid var(--border-color);
     }
 
     input,
     textarea{
+
       width:100%;
       padding:10px;
-      margin-bottom:15px;
-      border:1px solid #ccc;
-      border-radius:5px;
-      outline:none;
+      border-radius:8px;
+      border:1px solid var(--border-color);
+      background:var(--bg-color);
+      color:var(--text-main);
+      margin-top:10px;
     }
 
-    textarea{
-      height:100px;
-      resize:none;
-    }
+    button.primary{
 
-    button{
-      padding:10px 18px;
-      background:#4a90e2;
+      background:var(--accent-green);
       color:white;
       border:none;
-      border-radius:5px;
+      padding:10px 20px;
+      border-radius:8px;
       cursor:pointer;
+      margin-top:15px;
     }
 
-    button:hover{
-      background:#357abd;
-    }
+    button.primary:hover{
 
-    .question{
-      margin-bottom:20px;
-    }
-
-    .question p{
-      margin-bottom:8px;
-      color:#333;
-      font-weight:bold;
-    }
-
-    #result{
-      margin-top:25px;
+      opacity:0.9;
     }
 
     #chatBox{
-      height:300px;
+
+      height:250px;
       overflow-y:auto;
-      border:1px solid #ccc;
+      border:1px solid var(--border-color);
       padding:10px;
       border-radius:10px;
       margin-bottom:15px;
-      background:#fafafa;
+      background:var(--bg-color);
+    }
+
+    footer{
+
+      text-align:center;
+      padding:30px;
+      opacity:0.8;
+      font-size:14px;
+    }
+
+    .small-gif{
+
+      width:220px;
+      display:block;
+      margin:auto;
+      border-radius:12px;
+      margin-bottom:15px;
     }
 
   </style>
@@ -124,16 +229,60 @@
 
 <header>
 
-  <h2>Mental Health Dashboard</h2>
+  <div class="logo">
+    🌿 MindWell
+  </div>
 
-  <div>
+  <nav>
 
-    <button>
-      Find Therapist
+    <a href="#" class="active">
+      Dashboard
+    </a>
+
+    <a href="journal.html">Journal</a>
+
+   <a href="resources.html">
+  Resources
+</a>
+
+ <a href="therapist.html">
+  Find a Therapist
+</a>
+
+    <a href="profile.html">
+  Profile
+</a>
+
+<a href="history.html">
+     Assessment History
+</a>
+
+<a href="feedback.html">
+     Feedback
+</a>
+
+  </nav>
+
+  <div class="controls">
+
+    <button id="theme-toggle"
+      onclick="toggleTheme()">
+
+      <span id="toggle-icon">
+        ☀️
+      </span>
+
+      <span id="toggle-text">
+        Day Mode
+      </span>
+
     </button>
 
-    <button onclick="logout()">
-      Logout
+    <button class="crisis-btn"
+      onclick="callHelpline()">
+
+      Emergency Help
+
     </button>
 
   </div>
@@ -142,611 +291,807 @@
 
 <div class="container">
 
-  <h3>Welcome 👋</h3>
+ <h1 id="welcomeText">
+  Welcome 👋
+</h1>
 
-  <!-- Daily Check-in -->
-  <div class="card">
+  <!-- LEFT COLUMN -->
 
-    <h4>Daily Check-in</h4>
+  <div style="
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+  ">
 
-    <input 
-      type="number" 
-      id="mood" 
-      placeholder="Mood (1-10)"
-      min="1"
-      max="10"
-    />
+    <!-- Stress Relief -->
 
-    <textarea 
-      id="note"
-      placeholder="Write how you feel..."
-    ></textarea>
+<div class="card">
 
-    <button onclick="submitCheckin()">
-      Submit
-    </button>
+  <h3>
+    🌿 Stress Relief Therapy
+  </h3>
+<img
+  src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1200&auto=format&fit=crop"
+  width="100%"
+  style="
+    border-radius:15px;
+    margin-bottom:20px;
+    height:250px;
+    object-fit:cover;
+  "
+>
 
-  </div>
+  <p style="
+    text-align:center;
+    line-height:1.7;
+  ">
 
-  <!-- Assessment -->
-  <div class="card">
+    Take a deep breath 💙<br>
 
-    <h4>Initial Assessment</h4>
+    Relax your mind and focus on
+    positive thoughts.<br><br>
 
-    <p style="margin-bottom:20px; color:gray;">
-      Rate each question from 1 to 10
-    </p>
+    “Your peace is more important
+    than perfection.”
 
-    <form id="assessmentForm">
+  </p>
 
-      <div class="question">
-        <p>1. How stressed are you today?</p>
-        <input type="number" min="1" max="10" required>
-      </div>
+</div>
 
-      <div class="question">
-        <p>2. How anxious do you feel?</p>
-        <input type="number" min="1" max="10" required>
-      </div>
+    
 
-      <div class="question">
-        <p>3. How well did you sleep last night?</p>
-        <input type="number" min="1" max="10" required>
-      </div>
+    <!-- AI Mood -->
 
-      <div class="question">
-        <p>4. How energetic do you feel?</p>
-        <input type="number" min="1" max="10" required>
-      </div>
+    <div class="card">
 
-      <div class="question">
-        <p>5. How focused are you today?</p>
-        <input type="number" min="1" max="10" required>
-      </div>
-
-      <div class="question">
-        <p>6. How lonely do you feel?</p>
-        <input type="number" min="1" max="10" required>
-      </div>
-
-      <div class="question">
-        <p>7. How happy are you today?</p>
-        <input type="number" min="1" max="10" required>
-      </div>
-
-      <div class="question">
-        <p>8. How motivated are you?</p>
-        <input type="number" min="1" max="10" required>
-      </div>
-
-      <div class="question">
-        <p>9. How often do you overthink?</p>
-        <input type="number" min="1" max="10" required>
-      </div>
-
-      <div class="question">
-        <p>10. How calm do you feel?</p>
-        <input type="number" min="1" max="10" required>
-      </div>
-
-      <div class="question">
-        <p>11. How confident do you feel?</p>
-        <input type="number" min="1" max="10" required>
-      </div>
-
-      <div class="question">
-        <p>12. How emotionally balanced are you?</p>
-        <input type="number" min="1" max="10" required>
-      </div>
-
-      <button type="submit">
-        Submit Assessment
-      </button>
-
-    </form>
-
-    <!-- Report Section -->
-    <div id="result"></div>
-
-  </div>
-
-  <!-- Mood Chart -->
-  <div class="card">
-
-    <h4>Mood Analysis Chart</h4>
-
-    <canvas id="moodChart"></canvas>
-
-  </div>
-
-  <!-- AI Chat Support -->
-  <div class="card">
-
-    <h4>AI Mental Health Assistant</h4>
-
-    <div id="chatBox"></div>
-
-    <input 
-      type="text"
-      id="userMessage"
-      placeholder="Ask something..."
-    />
-
-    <button onclick="sendMessage()">
-      Send
-    </button>
-
-  </div>
-
-  <!-- Therapist Support -->
-  <div class="card">
-
-    <h4>Connect With Therapist</h4>
-
-    <div style="
-      border:1px solid #ddd;
-      padding:15px;
-      border-radius:10px;
-      margin-bottom:15px;
-    ">
-
-      <h3>Dr. Priya Sharma</h3>
+      <h3>
+         AI Mood Status
+      </h3>
 
       <p>
-        <strong>Specialization:</strong>
-        Anxiety & Stress Management
+         Status:
+        <strong>
+          Stable & Positive
+        </strong>
       </p>
 
-      <p>
-        <strong>Experience:</strong>
-        8 Years
+    </div>
+
+    <!-- Joke -->
+
+    <div class="card">
+
+      <h3>
+          Stress Relief Jokes
+      </h3>
+
+      <p id="jokeText"
+        style="margin-bottom:15px;">
+
+        Click below for a funny joke 
+
       </p>
 
-      <p>
-        <strong>Availability:</strong>
-        Mon - Sat
-      </p>
+      <button class="primary"
+        onclick="generateJoke()">
 
-      <button onclick="bookAppointment()">
-        Book Appointment
+        Show Joke
+
       </button>
 
     </div>
 
-    <textarea
-      id="therapistMessage"
-      placeholder="Write message to therapist..."
-    ></textarea>
+    <!-- Emergency -->
 
-    <button onclick="sendToTherapist()">
-      Send Message
-    </button>
+    <div class="card">
 
-    <div id="therapistReply" style="margin-top:20px;"></div>
+      <h3 style="color:red;">
+        🚨 Emergency Support
+      </h3>
 
-  </div>
-  <!-- Music Therapy -->
-<div class="card">
+  <img
+  src="emergency.jpg.jpeg"
+  width="100%"
+  style="
+    border-radius:15px;
+    margin-bottom:20px;
+    height:250px;
+    object-fit:cover;
+  "
+>
 
-  <h4>Music Therapy</h4>
+      <button class="primary"
+        onclick="callHelpline()">
 
-  <p style="margin-bottom:15px;">
-    Relax your mind with calming music
-  </p>
+        Call Helpline
 
-  <audio controls style="width:100%;">
+      </button>
 
-    <source 
-      src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-      type="audio/mpeg"
-    >
-
-    Your browser does not support audio.
-
-  </audio>
-  
+    </div>
 
   </div>
-  <!-- Funny Jokes Section -->
-<div class="card">
 
-  <h4>Stress Relief Jokes 😂</h4>
-
-  <p id="jokeText" style="
-    margin:20px 0;
-    font-size:18px;
-    color:#444;
-  ">
-    Click the button to see a funny joke 😄
-  </p>
-
-  <button onclick="generateJoke()">
-    Show Joke
-  </button>
-
-</div>
-  <!-- Emergency Help -->
-<div class="card">
-
-  <h4 style="color:red;">
-    Emergency Mental Health Support
-  </h4>
-
-  <p style="margin-bottom:15px;">
-    If you are in emotional crisis or need urgent help,
-    contact emergency support immediately.
-  </p>
+  <!-- RIGHT COLUMN -->
 
   <div style="
     display:flex;
-    gap:15px;
-    flex-wrap:wrap;
+    flex-direction:column;
+    gap:25px;
   ">
 
-    <button onclick="callHelpline()">
-      Call Helpline
+    <!-- Assessment -->
+
+   <!-- Assessment -->
+
+<div class="card" style="
+  background:linear-gradient(
+    135deg,
+    #dfe9f3,
+    #ffffff
+  );
+">
+
+  <div style="
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:20px;
+  ">
+
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/3771/3771417.png"
+      width="70"
+    >
+
+    <div>
+
+      <h2 style="
+        margin-bottom:5px;
+        color:#4a6d5a;
+      ">
+         Mental Health Assessment
+      </h2>
+
+      <p style="
+        color:#555;
+      ">
+        Answer honestly to understand
+        your emotional wellness 💙
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- Progress Bar -->
+
+  <div style="
+    background:#ddd;
+    height:12px;
+    border-radius:10px;
+    overflow:hidden;
+    margin-bottom:25px;
+  ">
+
+    <div style="
+      width:70%;
+      height:100%;
+      background:linear-gradient(
+        90deg,
+        #96b3a2,
+        #6ab04c
+      );
+    ">
+    </div>
+
+  </div>
+
+  <form id="assessmentForm">
+
+    <div class="resource-grid">
+  <div class="resource-item">
+
+  <b> Stress Level</b>
+
+  <input
+    type="number"
+    min="1"
+    max="10"
+    required
+  >
+
+  <small>
+    1–3 = Very Low Stress <br>
+    4–6 = Moderate Stress <br>
+    7–8 = High Stress <br>
+    9–10 = Extreme Stress 
+  </small>
+
+    </div>
+
+     <div class="resource-item">
+
+  <b> Anxiety Level</b>
+
+  <input type="number" min="1" max="10" required>
+
+  <small>
+    1–3 = Rarely Anxious <br>
+    4–6 = Sometimes Anxious <br>
+    7–8 = Frequently Anxious <br>
+    9–10 = Extremely Anxious 
+  </small>
+
+</div>
+
+    <div class="resource-item">
+
+  <b> Sleep Quality</b>
+
+  <input type="number" min="1" max="10" required>
+
+  <small>
+    1–3 = Poor Sleep <br>
+    4–6 = Average Sleep <br>
+    7–8 = Good Sleep <br>
+    9–10 = Excellent Sleep 
+  </small>
+
+</div>
+
+    <div class="resource-item">
+
+  <b> Happiness</b>
+
+  <input type="number" min="1" max="10" required>
+
+  <small>
+    1–3 = Very Unhappy <br>
+    4–6 = Neutral <br>
+    7–8 = Happy <br>
+    9–10 = Very Happy 
+  </small>
+
+</div>
+
+    <div class="resource-item">
+
+  <b> Focus Level</b>
+
+  <input type="number" min="1" max="10" required>
+
+  <small>
+    1–3 = Cannot Focus <br>
+    4–6 = Sometimes Focused <br>
+    7–8 = Focused <br>
+    9–10 = Highly Focused 
+  </small>
+
+</div>
+
+   <div class="resource-item">
+
+  <b> Motivation</b>
+
+  <input type="number" min="1" max="10" required>
+
+  <small>
+    1–3 = No Motivation <br>
+    4–6 = Average Motivation <br>
+    7–8 = Motivated <br>
+    9–10 = Highly Motivated 
+  </small>
+
+</div>
+    
+
+    <!-- Motivational Quote -->
+
+    <div style="
+      margin-top:25px;
+      background:#f5fff7;
+      padding:15px;
+      border-left:5px solid #6ab04c;
+      border-radius:10px;
+      font-style:italic;
+      color:#333;
+    ">
+
+       “Healing takes time,
+      and asking for help is a courageous step.”
+
+    </div>
+
+    <button class="primary"
+      style="
+        width:100%;
+        margin-top:25px;
+        font-size:16px;
+        padding:14px;
+      ">
+
+      Submit Assessment 
+
     </button>
 
-    <button onclick="sendEmergencyMail()">
-      Emergency Email
-    </button>
+  </form>
+
+  <div id="result"
+    style="margin-top:20px;">
+  </div>
+
+</div>
+
+    <!-- Mood Chart -->
+
+    <div class="card">
+
+      <h3>
+         Mood Analysis Chart
+      </h3>
+
+      <canvas id="moodChart"></canvas>
+
+    </div>
+
+    <!-- AI Chat -->
+
+    <div class="card">
+
+      <h3>
+         AI Mental Health Assistant
+      </h3>
+
+      <div id="chatBox"></div>
+
+      <input
+        type="text"
+        id="userMessage"
+        placeholder="Talk with AI..."
+      >
+
+      <button class="primary"
+        onclick="sendMessage()">
+
+        Send
+
+      </button>
+
+    </div>
+
+    
 
   </div>
 
 </div>
 
-</div>
+<footer>
+
+  🔒 Your Data is Private & Secure
+
+</footer>
 
 <script>
 
+  if(localStorage.getItem("isLoggedIn") !== "true"){
+    alert("Please login first.");
+    window.location.href = "login.html";
+}
+
   let moodChart;
 
-  let moodLabels = [
-    "Stress",
-    "Anxiety",
-    "Sleep",
-    "Energy",
-    "Focus",
-    "Loneliness",
-    "Happiness",
-    "Motivation",
-    "Overthinking",
-    "Calmness",
-    "Confidence",
-    "Balance"
-  ];
+  function toggleTheme(){
 
-  // Daily Check-in
-  function submitCheckin(){
+    const body = document.body;
 
-    const mood = document.getElementById("mood").value;
-    const note = document.getElementById("note").value;
+    const icon =
+      document.getElementById("toggle-icon");
 
-    if(mood && note){
+    const text =
+      document.getElementById("toggle-text");
 
-      alert("Check-in Submitted Successfully");
+    body.classList.toggle("dark-mode");
+
+    if(body.classList.contains("dark-mode")){
+
+      icon.innerText = "🌙";
+
+      text.innerText = "Dark Mode";
 
     } else {
 
-      alert("Please fill all fields");
+      icon.innerText = "☀️";
+
+      text.innerText = "Day Mode";
     }
   }
 
-  // Logout
-  function logout(){
+  function goToTherapist(){
 
-    alert("Logged Out");
+    document.getElementById(
+      "therapistSection"
+    ).scrollIntoView({
 
-    window.location.href = "login.html";
+      behavior:"smooth"
+    });
   }
 
-  // Assessment Form
-  const form = document.getElementById("assessmentForm");
+  function callHelpline(){
 
-  form.addEventListener("submit", function(e){
+    alert(
+      "Mental Health Helpline: 1800-599-0019"
+    );
+  }
+
+  function bookAppointment(){
+
+    alert(
+      "Appointment Request Sent Successfully"
+    );
+  }
+
+  // Assessment
+
+  const form =
+    document.getElementById(
+      "assessmentForm"
+    );
+
+  form.addEventListener("submit",async function(e){
 
     e.preventDefault();
 
-    const answers = document.querySelectorAll("#assessmentForm input");
+    const inputs =
+      form.querySelectorAll("input");
 
     let total = 0;
 
-    answers.forEach((input) => {
+    let values = [];
 
-      total += Number(input.value);
+    inputs.forEach((input) => {
+
+      const value =
+        Number(input.value);
+
+      total += value;
+
+      values.push(value);
     });
 
-    const average = total / answers.length;
+    const average =
+      total / values.length;
 
-    let report = "";
+      const userName =
+localStorage.getItem(
+    "userName"
+);
+
+      const userEmail =
+    localStorage.getItem(
+        "userEmail"
+    );
+
+    let status = "";
     let suggestion = "";
 
     if(average >= 8){
 
-      report = "Excellent Mental Health";
+      status = "Excellent";
 
       suggestion =
-        "You are emotionally strong and balanced.";
+        "You are emotionally healthy.";
 
     }
 
     else if(average >= 5){
 
-      report = "Moderate Mental Health";
+      status = "Moderate";
 
       suggestion =
-        "You may be experiencing some stress.";
-
+        "Take proper rest and relaxation.";
     }
 
     else{
 
-      report = "Mental Health Needs Attention";
+      status = "Needs Attention";
 
       suggestion =
-        "Please consider speaking with a therapist.";
+        "Please consult a therapist.";
     }
 
-    document.getElementById("result").innerHTML = `
+    try {
+
+    const response =
+        await fetch(
+            "http://localhost:5000/assessment",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                    "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    userName,
+                    userEmail,
+
+                    stress: values[0],
+                    anxiety: values[1],
+                    sleep: values[2],
+                    happiness: values[3],
+                    focus: values[4],
+                    motivation: values[5]
+                })
+            }
+        );
+
+    const data =
+        await response.json();
+
+    console.log(data.message);
+
+} catch(error) {
+
+    console.log(error);
+
+    alert(
+        "Unable to save assessment"
+    );
+}
+
+    document.getElementById(
+      "result"
+    ).innerHTML = `
 
       <div style="
-        background:#f9f9f9;
-        padding:20px;
+        background:var(--bg-color);
+        padding:15px;
         border-radius:10px;
-        border:1px solid #ddd;
       ">
 
-        <h3 style="
-          margin-bottom:15px;
-          color:#4a90e2;
-        ">
-          Your Mental Health Report
+        <h3>
+          Report
         </h3>
 
-        <p><strong>Total Score:</strong> ${total}</p>
+        <p>
+          <strong>Status:</strong>
+          ${status}
+        </p>
 
-        <p><strong>Average Score:</strong> ${average.toFixed(2)}</p>
+        <p>
+          <strong>Average Score:</strong>
+          ${average.toFixed(2)}
+        </p>
 
-        <p><strong>Status:</strong> ${report}</p>
-
-        <br>
-
-        <p><strong>Suggestion:</strong></p>
-
-        <p>${suggestion}</p>
+        <p>
+          <strong>Suggestion:</strong>
+          ${suggestion}
+        </p>
 
       </div>
     `;
 
-    const moodValues = [];
+    createChart(values);
 
-    answers.forEach((input) => {
+  });
 
-      moodValues.push(Number(input.value));
+  function createChart(values){
 
-    });
+    const ctx =
+      document.getElementById(
+        "moodChart"
+      );
 
     if(moodChart){
 
       moodChart.destroy();
     }
 
-    const ctx = document.getElementById("moodChart");
-
     moodChart = new Chart(ctx, {
 
-      type: "bar",
+      type:"bar",
 
-      data: {
+      data:{
 
-        labels: moodLabels,
+        labels:[
+          "Stress",
+          "Anxiety",
+          "Sleep",
+          "Happiness",
+          "Focus",
+          "Motivation"
+        ],
 
-        datasets: [{
+        datasets:[{
 
-          label: "Mental Health Score",
+          label:"Mental Health Score",
 
-          data: moodValues,
+          data:values,
 
-          backgroundColor: [
-            "#4a90e2",
-            "#50c878",
-            "#ffb347",
-            "#ff6961",
-            "#9370db",
-            "#20b2aa",
-            "#ffa07a",
-            "#6495ed",
-            "#ffcc00",
-            "#00bfff",
-            "#90ee90",
-            "#ff7f50"
+          backgroundColor:[
+            "#96b3a2",
+            "#6ab04c",
+            "#f9ca24",
+            "#eb4d4b",
+            "#22a6b3",
+            "#be2edd"
           ],
 
-          borderRadius: 5
+          borderRadius:8
         }]
       },
 
-      options: {
+      options:{
 
-        responsive: true,
+        responsive:true,
 
-        scales: {
-
-          y: {
-            beginAtZero: true,
-            max: 10
+        scales:{
+          y:{
+            beginAtZero:true,
+            max:10
           }
         }
       }
     });
-
-  });
+  }
 
   // AI Chat
+
   function sendMessage(){
 
-    const input = document.getElementById("userMessage");
+    const input =
+      document.getElementById(
+        "userMessage"
+      );
 
-    const message = input.value.trim();
+    const message =
+      input.value.trim();
 
     if(message === "") return;
 
-    const chatBox = document.getElementById("chatBox");
+    const chatBox =
+      document.getElementById(
+        "chatBox"
+      );
 
     chatBox.innerHTML += `
-      <div style="text-align:right; margin-bottom:10px;">
+
+      <div style="
+        text-align:right;
+        margin-bottom:10px;
+      ">
+
         <span style="
-          background:#4a90e2;
+          background:#96b3a2;
           color:white;
           padding:10px;
           border-radius:10px;
           display:inline-block;
         ">
+
           ${message}
+
         </span>
+
       </div>
     `;
 
     let reply = "";
 
-    const lowerMessage = message.toLowerCase();
+    const lower =
+      message.toLowerCase();
 
-    if(lowerMessage.includes("stress")){
+    if(lower.includes("stress")){
 
-      reply = "Try meditation and deep breathing.";
-
-    }
-
-    else if(lowerMessage.includes("sad")){
-
-      reply = "Talk with supportive people and rest properly.";
+      reply =
+        "Try deep breathing and meditation.";
 
     }
 
-    else if(lowerMessage.includes("sleep")){
+    else if(lower.includes("sad")){
 
-      reply = "Maintain a proper sleep schedule.";
+      reply =
+        "Talk with someone you trust.";
+
+    }
+
+    else if(lower.includes("sleep")){
+
+      reply =
+        "Maintain proper sleep routine.";
 
     }
 
     else{
 
-      reply = "I am here to support you.";
+      reply =
+        "I am here to support you 💙";
     }
 
     setTimeout(() => {
 
       chatBox.innerHTML += `
-        <div style="text-align:left; margin-bottom:10px;">
+
+        <div style="
+          text-align:left;
+          margin-bottom:10px;
+        ">
+
           <span style="
-            background:#e5e5e5;
+            background:#ddd;
             padding:10px;
             border-radius:10px;
             display:inline-block;
+            color:black;
           ">
+
             ${reply}
+
           </span>
+
         </div>
       `;
 
-      chatBox.scrollTop = chatBox.scrollHeight;
+      chatBox.scrollTop =
+        chatBox.scrollHeight;
 
     }, 500);
 
     input.value = "";
   }
 
-  // Therapist Functions
-  function bookAppointment(){
+  // Jokes
 
-    alert("Appointment Request Sent Successfully");
+  function generateJoke(){
+
+    const jokes = [
+
+      "Why don’t programmers like nature? Too many bugs ",
+
+      "Papa: Result kaisa aaya? Beta: Confidence full hai ",
+
+      "Life before exam: Kal se pakka padhai ",
+
+      "Why was the computer cold? It forgot to close Windows ",
+
+      "Teacher: Homework kaha hai? Student: Network issue ",
+
+      "Mummy: Din bhar mobile chalata rehta hai ",
+
+      "Why did the student bring ladder? Higher education ",
+
+      "Padhai aur neend kabhi ek saath nahi aati ",
+
+      "Exam ke time hi sabse jyada neend aati hai ",
+
+      "Engineer ka dard sirf engineer samajhta hai "
+
+    ];
+
+    const randomIndex =
+      Math.floor(
+        Math.random() * jokes.length
+      );
+
+    document.getElementById(
+      "jokeText"
+    ).innerText =
+      jokes[randomIndex];
   }
 
-  function sendToTherapist(){
+const userName =
+    localStorage.getItem(
+        "userName"
+    );
 
-    const message =
-      document.getElementById("therapistMessage").value;
+if(userName){
 
-    if(message === ""){
-
-      alert("Please write a message");
-
-      return;
-    }
-
-    document.getElementById("therapistReply").innerHTML = `
-
-      <div style="
-        background:#f1f1f1;
-        padding:15px;
-        border-radius:10px;
-        border:1px solid #ccc;
-      ">
-
-        <p><strong>Your Message:</strong></p>
-
-        <p>${message}</p>
-
-        <br>
-
-        <p><strong>Therapist Reply:</strong></p>
-
-        <p>
-          Thank you for reaching out.
-          We will discuss this during the appointment.
-        </p>
-
-      </div>
-    `;
-
-    document.getElementById("therapistMessage").value = "";
-  }
-  // Funny Jokes
-function generateJoke(){
-
-  const jokes = [
-
-    "Why don’t programmers like nature? Because it has too many bugs 😂",
-
-    "Teacher: Why are you late? Student: Because of the sign board, sir. Teacher: What sign board? Student: 'School Ahead, Go Slow' 😆",
-
-    "Mummy: Padhai kar lo. Me: Kar toh raha hu. Mummy: Phone me? Me: Knowledge bhi toh digital ho gaya hai 😂",
-
-    "Why was the computer cold? Because it forgot to close Windows 😂",
-
-    "Papa: Result kaisa aaya? Beta: Sirf marks kam hai, confidence full hai 😎😂",
-
-    "Girlfriend: Tum mujhe kitna pyar karte ho? Boyfriend: Jitna phone ko charging se 😆",
-
-    "Teacher: Tell me a sentence with 'I'. Student: I is... Teacher: No, say 'I am'. Student: Okay... I am the ninth letter of alphabet 😂",
-
-    "Life before exam: Kal se pakka padhai. Life during exam: Bhagwan bas pass kara do 😭😂",
-
-    "Why did the student bring a ladder to school? Because he wanted higher education 😆",
-
-    "Mummy: Din bhar mobile chalata rehta hai. Me: Mummy research kar raha hu. Mummy: Kaisi research? Me: Meme science 😂"
-
-  ];
-
-  const randomIndex =
-    Math.floor(Math.random() * jokes.length);
-
-  document.getElementById("jokeText").innerText =
-    jokes[randomIndex];
-}
-  // Emergency Call
-function callHelpline(){
-
-  alert(
-    "National Mental Health Helpline: 1800-599-0019"
-  );
-}
-
-// Emergency Email
-function sendEmergencyMail(){
-
-  window.location.href =
-    "mailto:support@mentalhealth.com";
+    document.getElementById(
+        "welcomeText"
+    ).innerHTML =
+    "Welcome " + userName + " ";
 }
 
 </script>

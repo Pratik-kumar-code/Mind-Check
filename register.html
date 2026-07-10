@@ -2,81 +2,165 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Register - Mental Health Dashboard</title>
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0"/>
+
+  <title>Register - MindWell</title>
 
   <style>
+
     *{
       margin:0;
       padding:0;
       box-sizing:border-box;
-      font-family:Arial, sans-serif;
+      font-family:'Segoe UI',Tahoma,sans-serif;
     }
 
     body{
+
       height:100vh;
       display:flex;
       justify-content:center;
       align-items:center;
-      background:#f4f7fb;
+
+      background:
+      linear-gradient(
+        135deg,
+        #dfe9f3,
+        #ffffff
+      );
     }
 
     .register-container{
-      width:380px;
+
+      width:400px;
       background:white;
-      padding:30px;
-      border-radius:10px;
-      box-shadow:0 0 10px rgba(0,0,0,0.1);
+      padding:35px;
+      border-radius:20px;
+
+      box-shadow:
+      0 10px 25px rgba(0,0,0,0.1);
+
+      animation:fadeIn 1s ease;
+    }
+
+    .logo{
+
+      text-align:center;
+      font-size:45px;
+      margin-bottom:10px;
     }
 
     .register-container h2{
+
       text-align:center;
-      margin-bottom:20px;
-      color:#333;
+      margin-bottom:10px;
+      color:#4a6d5a;
+    }
+
+    .subtitle{
+
+      text-align:center;
+      color:#666;
+      margin-bottom:25px;
+      font-size:14px;
     }
 
     .input-group{
-      margin-bottom:15px;
+
+      margin-bottom:18px;
     }
 
     .input-group label{
+
       display:block;
-      margin-bottom:5px;
-      color:#555;
+      margin-bottom:6px;
+      color:#444;
+      font-weight:500;
     }
 
     .input-group input{
+
       width:100%;
-      padding:10px;
+      padding:12px;
       border:1px solid #ccc;
-      border-radius:5px;
+      border-radius:10px;
       outline:none;
+      font-size:15px;
+      transition:0.3s;
+    }
+
+    .input-group input:focus{
+
+      border-color:#4a90e2;
+      box-shadow:
+      0 0 8px rgba(74,144,226,0.3);
     }
 
     .register-btn{
+
       width:100%;
-      padding:10px;
-      background:#4a90e2;
+      padding:13px;
+
+      background:
+      linear-gradient(
+        90deg,
+        #4a90e2,
+        #6ab04c
+      );
+
       color:white;
       border:none;
-      border-radius:5px;
+      border-radius:10px;
       cursor:pointer;
       font-size:16px;
+      font-weight:bold;
+
+      transition:0.3s;
     }
 
     .register-btn:hover{
-      background:#357abd;
+
+      transform:scale(1.02);
+      opacity:0.95;
     }
 
     .login-text{
+
       text-align:center;
-      margin-top:15px;
+      margin-top:18px;
+      color:#555;
     }
 
     .login-text a{
+
       color:#4a90e2;
       text-decoration:none;
+      font-weight:bold;
     }
+
+    .quote{
+
+      text-align:center;
+      margin-top:20px;
+      font-size:13px;
+      color:#777;
+      font-style:italic;
+    }
+
+    @keyframes fadeIn{
+
+      from{
+        opacity:0;
+        transform:translateY(20px);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
   </style>
 </head>
 
@@ -84,77 +168,192 @@
 
 <div class="register-container">
 
-  <h2>Create Account</h2>
+  <div class="logo">
+    🌿
+  </div>
+
+  <h2>
+    Create Your Account
+  </h2>
+
+  <p class="subtitle">
+    Start your wellness journey today 💙
+  </p>
 
   <form id="registerForm">
 
     <div class="input-group">
-      <label>Full Name</label>
-      <input type="text" id="name" required>
+
+      <label>
+        Full Name
+      </label>
+
+      <input
+        type="text"
+        id="name"
+        placeholder="Enter your full name"
+        required>
+
     </div>
 
     <div class="input-group">
-      <label>Email</label>
-      <input type="email" id="email" required>
+
+      <label>
+        Email Address
+      </label>
+
+      <input
+        type="email"
+        id="email"
+        placeholder="Enter your email"
+        required>
+
     </div>
 
     <div class="input-group">
-      <label>Password</label>
-      <input type="password" id="password" required>
+
+      <label>
+        Password
+      </label>
+
+      <input
+        type="password"
+        id="password"
+        placeholder="Create password"
+        required>
+
     </div>
 
     <div class="input-group">
-      <label>Confirm Password</label>
-      <input type="password" id="confirmPassword" required>
+
+      <label>
+        Confirm Password
+      </label>
+
+      <input
+        type="password"
+        id="confirmPassword"
+        placeholder="Confirm password"
+        required>
+
     </div>
 
-    <button type="submit" class="register-btn">
+    <button
+      type="submit"
+      class="register-btn">
+
       Register
+
     </button>
 
   </form>
 
   <div class="login-text">
+
     Already have an account?
-    <a href="login.html">Login</a>
+
+    <a href="login.html">
+      Login
+    </a>
+
+  </div>
+
+  <div class="quote">
+
+    “Healing begins with self-care 🌈”
+
   </div>
 
 </div>
 
 <script>
 
-  const registerForm = document.getElementById("registerForm");
+const registerForm =
+document.getElementById("registerForm");
 
-  registerForm.addEventListener("submit", function(e){
+registerForm.addEventListener(
+  "submit",
+  async function(e){
 
     e.preventDefault();
 
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
+    const name =
+      document.getElementById(
+        "name"
+      ).value;
+
+    const email =
+      document.getElementById(
+        "email"
+      ).value;
+
+    const password =
+      document.getElementById(
+        "password"
+      ).value;
+
+    const confirmPassword =
+      document.getElementById(
+        "confirmPassword"
+      ).value;
 
     if(password !== confirmPassword){
 
-      alert("Passwords do not match");
+      alert(
+        "Passwords do not match"
+      );
+
       return;
     }
 
-    // Save user in localStorage
-    const user = {
-      name,
-      email,
-      password
-    };
+    try{
 
-    localStorage.setItem("user", JSON.stringify(user));
+      const response =
+        await fetch(
+          "http://localhost:5000/register",
+          {
+            method:"POST",
 
-    alert("Registration Successful");
+            headers:{
+              "Content-Type":
+              "application/json"
+            },
 
-    // Redirect to login page
+            body:JSON.stringify({
+              name,
+              email,
+              password
+            })
+          }
+        );
+
+      const data =
+        await response.json();
+
+      alert(data.message);
+
+     if(data.message === "Registration Successful"){
+    registerForm.reset();
     window.location.href = "login.html";
+}
+      {
 
-  });
+        window.location.href =
+          "login.html";
+      }
+
+    }
+
+    catch(error){
+
+      alert(
+        "Server Error. Please try again."
+      );
+
+      console.log(error);
+    }
+
+});
 
 </script>
 

@@ -1,0 +1,270 @@
+document.addEventListener("DOMContentLoaded", () => {
+
+   document.getElementById("searchBtn").addEventListener("click", async () => {
+
+    const name = document.getElementById("searchUser").value.trim();
+
+    if(name === ""){
+
+        alert("Enter user name");
+
+        return;
+
+    }
+
+    try{
+
+        const response = await fetch(
+
+            `http://localhost:5000/api/admin/report/${encodeURIComponent(name)}`
+
+        );
+
+        const data = await response.json();
+
+        if(!data.success){
+
+            alert(data.message);
+
+            return;
+
+        }
+
+        // User Details
+
+        document.getElementById("name").innerText =
+        data.user.name;
+
+        document.getElementById("email").innerText =
+        data.user.email;
+
+        document.getElementById("phone").innerText =
+        "Not Available";
+
+        document.getElementById("joined").innerText =
+        "Not Available";
+
+        // Journal Details
+
+        document.getElementById("journals").innerText =
+        data.totalJournals;
+
+        document.getElementById("mood").innerText =
+        data.latestMood;
+
+        document.getElementById("lastJournal").innerText =
+        new Date(data.lastDate).toLocaleDateString();
+
+        // Latest Journal
+
+        document.getElementById("journalTitle").innerText =
+        data.latestJournal
+        ? data.latestJournal.title
+        : "-";
+
+        document.getElementById("journalContent").innerText =
+        data.latestJournal
+        ? data.latestJournal.content
+        : "-";
+
+      if (data.feedback) {
+
+    document.getElementById("rating").innerText =
+        data.feedback.rating + " / 5";
+
+    document.getElementById("feedbackMessage").innerText =
+        data.feedback.message;
+
+}
+else {
+
+    document.getElementById("rating").innerText = "-";
+
+    document.getElementById("feedbackMessage").innerText =
+        "No Feedback Submitted";
+
+}
+
+    }
+
+    
+    catch(err){
+
+        console.log(err);
+
+        alert("Server Error");
+
+    }
+
+});
+document.getElementById("downloadPDF").addEventListener("click", () => {
+
+    const { jsPDF } = window.jspdf;
+
+    const doc = new jsPDF();
+
+    let y = 20;
+
+    // Title
+    doc.setFontSize(22);
+    doc.setTextColor(37,99,235);
+    doc.text("MindWell", 75, y);
+
+    y += 10;
+
+    doc.setFontSize(16);
+    doc.setTextColor(0,0,0);
+    doc.text("Mental Health Report", 58, y);
+
+    y += 10;
+
+    doc.line(20,y,190,y);
+
+    y += 12;
+
+    // User Information
+
+    doc.setFontSize(15);
+    doc.setTextColor(30,58,138);
+    doc.text("USER INFORMATION",20,y);
+
+    y += 10;
+
+    doc.setFontSize(12);
+    doc.setTextColor(0,0,0);
+
+    doc.text("Name : " +
+        document.getElementById("name").innerText,
+        20,y);
+
+    y+=8;
+
+    doc.text("Email : " +
+        document.getElementById("email").innerText,
+        20,y);
+
+    y+=8;
+
+    doc.text("Phone : " +
+        document.getElementById("phone").innerText,
+        20,y);
+
+    y+=8;
+
+    doc.text("Joined : " +
+        document.getElementById("joined").innerText,
+        20,y);
+
+    y+=15;
+
+    // Journal
+
+    doc.setFontSize(15);
+    doc.setTextColor(30,58,138);
+    doc.text("JOURNAL SUMMARY",20,y);
+
+    y+=10;
+
+    doc.setFontSize(12);
+    doc.setTextColor(0,0,0);
+
+    doc.text("Total Journals : "+
+        document.getElementById("journals").innerText,
+        20,y);
+
+    y+=8;
+
+    // Remove emoji from mood
+    const mood = document.getElementById("mood").innerText.replace(/[^\w\s]/g,"");
+
+    doc.text("Latest Mood : "+mood,
+        20,y);
+
+    y+=8;
+
+    doc.text("Last Journal Date : "+
+        document.getElementById("lastJournal").innerText,
+        20,y);
+
+    y+=8;
+
+    doc.text("Journal Title : "+
+        document.getElementById("journalTitle").innerText,
+        20,y);
+
+    y+=15;
+
+    // Journal Content
+
+    doc.setFontSize(15);
+    doc.setTextColor(30,58,138);
+
+    doc.text("LATEST JOURNAL",20,y);
+
+    y+=10;
+
+    doc.setFontSize(12);
+    doc.setTextColor(0,0,0);
+
+    const content =
+        document.getElementById("journalContent").innerText;
+
+    const lines =
+        doc.splitTextToSize(content,170);
+
+    doc.text(lines,20,y);
+
+    y += lines.length*8 + 10;
+
+    // Feedback
+
+    doc.setFontSize(15);
+    doc.setTextColor(30,58,138);
+
+    doc.text("USER FEEDBACK",20,y);
+
+    y+=10;
+
+    doc.setFontSize(12);
+    doc.setTextColor(0,0,0);
+
+    doc.text("Rating : "+
+        document.getElementById("rating").innerText,
+        20,y);
+
+    y+=8;
+
+    const feedback =
+        document.getElementById("feedbackMessage").innerText;
+
+    const feedbackLines =
+        doc.splitTextToSize(feedback,170);
+
+    doc.text(feedbackLines,20,y);
+
+    y += feedbackLines.length*8 + 15;
+
+    doc.line(20,y,190,y);
+
+    y+=10;
+
+    doc.setFontSize(11);
+
+    doc.text(
+        "Generated By : MindWell Admin",
+        20,y
+    );
+
+    y+=8;
+
+    doc.text(
+        "Generated On : "+
+        new Date().toLocaleString(),
+        20,y
+    );
+
+    doc.save("MindWell_Report.pdf");
+
+});
+
+});

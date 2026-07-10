@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+
+Appointment Management
+
+</title>
+
+<link rel="stylesheet" href="css/admin.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">
+
+🌿 MindWell
+
+</div>
+
+<ul>
+
+ <li><a href="admindashboard.html">🏠 Dashboard</a></li> 
+
+ <li><a href="user.html">👥 Users</a></li>
+
+<li><a href="appointments.html">📅 Appointments</a></li> 
+
+</ul>
+
+</div>
+
+<div class="main">
+
+<div class="header">
+
+<h2>
+
+📅 Appointment Management
+
+</h2>
+
+</div>
+
+<div class="section">
+
+<input
+
+type="text"
+
+id="search"
+
+placeholder="Search Patient"
+
+style="width:100%;padding:12px;margin-bottom:20px;">
+
+<br>
+
+<select id="statusFilter">
+
+<option value="">All</option>
+
+<option>Pending</option>
+
+<option>Approved</option>
+
+<option>Completed</option>
+
+<option>Cancelled</option>
+
+</select>
+
+<br><br>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Patient</th>
+
+<th>Therapist</th>
+
+<th>Date</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="appointmentTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script src="js/appointments.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>MindWell Reports</title>
+
+    <link rel="stylesheet"
+        href="css/reports.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+        <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+
+    <!-- <div class="sidebar">
+
+        <div class="logo">
+
+            🌿 MindWell
+
+        </div> -->
+
+        <!-- <ul>
+
+            <li>
+                <a href="admin-dashboard.html">
+                    <i class="fa-solid fa-house"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="users.html">
+                    <i class="fa-solid fa-users"></i>
+                    Users
+                </a>
+            </li>
+
+            <li>
+                <a href="journals.html">
+                    <i class="fa-solid fa-book"></i>
+                    Journals
+                </a>
+            </li>
+
+            <li>
+                <a href="therapists.html">
+                    <i class="fa-solid fa-user-doctor"></i>
+                    Therapists
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="#">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="settings.html">
+                    <i class="fa-solid fa-gear"></i>
+                    Settings
+                </a>
+            </li>
+
+        </ul> -->
+
+    <!-- </div> -->
+
+    <!-- Main -->
+
+    <div class="main">
+
+        <div class="topbar">
+
+            <h1>User Report</h1>
+
+            <div class="admin">
+
+                <img src="images/admin.png">
+
+                <span>Administrator</span>
+
+            </div>
+
+        </div>
+
+        <!-- Search -->
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="searchUser"
+                placeholder="Search by User Name">
+
+            <button id="searchBtn">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                Search
+
+            </button>
+
+        </div>
+
+        <!-- Report -->
+
+        <div class="report-card">
+
+            <h2>
+
+                <i class="fa-solid fa-user"></i>
+
+                User Information
+
+            </h2>
+
+            <div class="grid">
+
+                <div>
+
+                    <strong>Name</strong>
+
+                    <p id="name">-</p>
+
+                </div>
+
+                <div>
+
+                    <strong>Email</strong>
+
+                    <p id="email">-</p>
+
+                </div>
+
+                <div>
+
+                    <strong>Phone</strong>
+
+                    <p id="phone">-</p>
+
+                </div>
+
+                <div>
+
+                    <strong>Joined</strong>
+
+                    <p id="joined">-</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Journal -->
+
+        <div class="report-card">
+
+            <h2>
+
+                <i class="fa-solid fa-book"></i>
+
+                Journal Report
+
+            </h2>
+
+            <div class="grid">
+
+                <div>
+
+                    <strong>Total Journals</strong>
+
+                    <p id="journals">0</p>
+
+                </div>
+
+                <div>
+
+                    <strong>Latest Mood</strong>
+
+                    <p id="mood">-</p>
+
+                </div>
+
+                <div>
+
+                    <strong>Last Journal</strong>
+
+                    <p id="lastJournal">-</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="report-card">
+
+    <h2>
+        <i class="fa-solid fa-book-open"></i>
+        Latest Journal
+    </h2>
+
+    <div class="grid">
+
+        <div>
+
+            <strong>Title</strong>
+
+            <p id="journalTitle">-</p>
+
+        </div>
+
+        <div>
+
+            <strong>Journal</strong>
+
+            <p id="journalContent">-</p>
+
+        </div>
+
+    </div>
+
+</div>
+        <!-- Feedback -->
+
+       <div class="report-card">
+
+    <h2>
+        <i class="fa-solid fa-star"></i>
+        User Feedback
+    </h2>
+
+    <div class="grid">
+
+        <div>
+
+            <strong>Rating</strong>
+
+            <p id="rating">-</p>
+
+        </div>
+
+        <div>
+
+            <strong>Feedback</strong>
+
+            <p id="feedbackMessage">No Feedback</p>
+
+        </div>
+
+    </div>
+
+</div>
+        <!-- PDF -->
+
+        <div class="download">
+
+           <button id="downloadPDF">
+
+<i class="fa-solid fa-download"></i>
+
+Download PDF
+
+</button>
+
+        </div>
+
+    </div>
+
+    <script src="js/reports.js"></script>
+    
+
+</body>
+
+</html>

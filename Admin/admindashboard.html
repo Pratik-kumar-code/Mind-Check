@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+
+MindWell Admin
+
+</title>
+
+<link rel="stylesheet"
+href="css/admin.css">
+
+</head>
+
+<body>
+
+<body>
+
+<div class="sidebar">
+
+    <div class="logo">
+        🌿 MindWell
+    </div>
+
+    <ul>
+
+        <!-- <li>
+            <a href="admin-dashboard.html">
+                🏠 Dashboard
+            </a>
+        </li> -->
+
+        <li>
+            <a href="user.html">
+                👥 Users
+            </a>
+        </li>
+
+        <!-- <li>
+            <a href="journals.html">
+                📖 Journals
+            </a>
+        </li> -->
+
+        <li>
+            <a href="appointments.html">
+                📅 Appointments
+            </a>
+        </li>
+
+        <li>
+            <a href="assessments.html">
+                📊 Assessments
+            </a>
+        </li>
+
+        <li>
+            <a href="reports.html">
+                📈 Reports
+            </a>
+        </li>
+
+        <li>
+            <a href="settings.html">
+                ⚙ Settings
+            </a>
+        </li>
+
+    </ul>
+
+</div>
+
+<div class="main">
+
+    <div class="header">
+
+        <h2>
+            Admin Dashboard
+        </h2>
+
+        <button
+            class="logout"
+            onclick="logout()">
+
+            Logout
+
+        </button>
+
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <h1 id="users">
+                0
+            </h1>
+
+            <p>
+                👥 Total Users
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h1 id="journals">
+                0
+            </h1>
+
+            <p>
+                📖 Journals
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h1 id="appointments">
+                0
+            </h1>
+
+            <p>
+                📅 Appointments
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <h1 id="assessments">
+                0
+            </h1>
+
+            <p>
+                📊 Assessments
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="section">
+
+    <h2>📈 Today's Overview</h2>
+
+    <div class="overview">
+
+        <div class="overview-card">
+
+            <h3 id="approvedAppointments">0</h3>
+
+            <p>🟢 Approved Appointments</p>
+
+        </div>
+
+        <div class="overview-card">
+
+            <h3 id="pendingAppointments">0</h3>
+
+            <p>🟡 Pending Appointments</p>
+
+        </div>
+
+        <div class="overview-card">
+
+            <h3 id="cancelledAppointments">0</h3>
+
+            <p>🔴 Cancelled Appointments</p>
+
+        </div>
+
+        <div class="overview-card">
+
+            <h3>Online</h3>
+
+            <p>🟢 Server Status</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="section">
+
+    <h2>⚡ Quick Actions</h2>
+
+    <div class="quick-actions">
+
+        <button onclick="location.href='user.html'">
+            👥 Manage Users
+        </button>
+
+        <button onclick="location.href='appointments.html'">
+            📅 View Appointments
+        </button>
+
+        <!-- <button onclick="location.href='journals.html'">
+            📖 View Journals
+        </button> -->
+
+        <button onclick="location.href='assessments.html'">
+            📊 View Assessments
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+<script src="js/admin.js"></script>
+
+</body>
+
+<footer class="footer">
+
+<div>
+
+🌿 <b>MindWell Admin Dashboard</b>
+
+</div>
+
+<p>
+
+Mental Health Management System
+
+</p>
+
+<p>
+
+Version 2.0 | Privacy Policy | Help Center
+
+</p>
+
+<p>
+
+© 2026 MindWell. All Rights Reserved.
+
+</p>
+
+</footer>
+</body>
+
+</html>

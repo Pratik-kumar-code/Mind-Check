@@ -1,9 +1,0 @@
-// routes/analytics.js
-const express = require('express');
-const router = express.Router();
-const { getMoodTrends } = require('../controllers/analyticsController');
-const auth = require('../middleware/auth'); // Assuming you have auth
-
-router.get('/weekly-trends', auth, getMoodTrends);
-
-module.exports = router;

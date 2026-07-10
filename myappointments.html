@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Appointments</title>
+
+    <style>
+
+        body{
+            font-family:Segoe UI;
+            background:#f4f7f8;
+            padding:30px;
+        }
+
+        h1{
+            color:#4a6d5a;
+        }
+
+        .card{
+            background:white;
+            padding:20px;
+            margin-top:20px;
+            border-radius:15px;
+            box-shadow:0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        button{
+            background:#4a90e2;
+            color:white;
+            border:none;
+            padding:10px 15px;
+            border-radius:8px;
+            cursor:pointer;
+            margin-top:10px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<h1>📅 My Appointments</h1>
+
+<div id="appointmentsContainer"></div>
+
+<script>
+
+async function loadAppointments(){
+
+    const email =
+        localStorage.getItem(
+            "userEmail"
+        );
+
+    const response =
+        await fetch(
+            "http://localhost:5000/appointment/" +
+            email
+        );
+
+    const data =
+        await response.json();
+
+    const container =
+        document.getElementById(
+            "appointmentsContainer"
+        );
+
+    container.innerHTML = "";
+
+    if(data.length === 0){
+
+        container.innerHTML =
+            "<h2>No appointments found.</h2>";
+
+        return;
+    }
+
+    data.forEach(item => {
+
+        container.innerHTML += `
+
+    <div class="card">
+
+        <h3>${item.therapist}</h3>
+
+        <p>📅 ${item.date}</p>
+
+        <p>⏰ ${item.time}</p>
+
+        <button
+        onclick="cancelAppointment('${item._id}')">
+            Cancel Appointment
+        </button>
+
+        </div>
+
+        `;
+    });
+}
+
+loadAppointments();
+async function cancelAppointment(id){
+
+    const confirmCancel =
+        confirm(
+            "Cancel this appointment?"
+        );
+
+    if(!confirmCancel){
+        return;
+    }
+
+    await fetch(
+        "http://localhost:5000/appointment/" + id,
+        {
+            method:"DELETE"
+        }
+    );
+
+    alert(
+        "Appointment Cancelled"
+    );
+
+    loadAppointments();
+}
+</script>
+
+</body>
+</html>

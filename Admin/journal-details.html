@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Journal Details</title>
+
+    <link rel="stylesheet" href="css/admin.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <div class="logo">
+
+        🌿 MindWell
+
+    </div>
+
+    <ul>
+
+        <li><a href="admindashboard.html">🏠 Dashboard</a></li>
+
+        <li><a href="user.html">👥 Users</a></li>
+
+        <li><a href="user-journals.html">📖 Journals</a></li>
+
+    </ul>
+
+</div>
+
+<div class="main">
+
+    <div class="header">
+
+        <h2>📖 Journal Details</h2>
+
+    </div>
+
+    <div class="section">
+
+        <h3 id="title"></h3>
+
+        <br>
+
+        <p>
+
+            <b>Mood :</b>
+
+            <span id="mood"></span>
+
+        </p>
+
+        <br>
+
+        <p>
+
+            <b>Date :</b>
+
+            <span id="date"></span>
+
+        </p>
+
+        <br>
+
+        <hr>
+
+        <br>
+
+        <div
+        id="content"
+        style="
+
+        line-height:30px;
+        font-size:18px;
+
+        ">
+
+        </div>
+
+        <br>
+
+        <!-- <button
+        onclick="editJournal()">
+
+        ✏ Edit
+
+        </button> -->
+
+        <button
+        onclick="deleteJournal()">
+
+        🗑 Delete
+
+        </button>
+
+        <button
+        onclick="history.back()">
+
+        ⬅ Back
+
+        </button>
+
+    </div>
+
+</div>
+
+<script src="js/journal-details.js"></script>
+
+</body>
+
+</html>
