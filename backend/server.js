@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors");
 // const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-const User = require("./models/User");
+const User = require("./models/user");
 const Assessment = require("./models/Assessment");
 const Appointment = require("./models/Appointment");
 const Journal = require("./models/Journal");
@@ -42,9 +42,11 @@ const upload = multer({ storage });
 
 // MongoDB Connection
 const mongoose = require("mongoose");
-const Setting = require("./models/Setting"); // Import model
+const Setting = require("./models/setting"); // Import model
 
-mongoose.connect("mongodb://127.0.0.1:27017/mindwell")
+const mongoUri = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/mindwell";
+
+mongoose.connect(mongoUri)
 .then(async () => {
 
     console.log("MongoDB Connected");
@@ -1413,6 +1415,8 @@ app.delete("/assessment/:id", async (req, res) => {
 });
 
 // Server Start
-app.listen(5000, () => {
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
     console.log("🚀 Server running on port 5000");
 });
