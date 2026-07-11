@@ -4,7 +4,7 @@
  */
 (function () {
   const localApi = "http://localhost:5000";
-  const productionApi = "https://YOUR-RENDER-SERVICE.onrender.com";
+  const productionApi = "https://mind-check-27vi.onrender.com";
 
   window.API_BASE_URL =
     window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
