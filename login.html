@@ -99,6 +99,15 @@
       0 0 8px rgba(74,144,226,0.3);
     }
 
+    .login-error{
+
+      display:none;
+      margin-top:-10px;
+      margin-bottom:18px;
+      color:#d32f2f;
+      font-size:14px;
+    }
+
     .login-btn{
 
       width:100%;
@@ -224,6 +233,8 @@
 
     </div>
 
+    <p id="loginError" class="login-error" role="alert"></p>
+
     <div class="input-group">
 
       <label>
@@ -275,6 +286,30 @@
 const loginForm =
 document.getElementById("loginForm");
 
+const emailInput =
+document.getElementById("email");
+
+const passwordInput =
+document.getElementById("password");
+
+const loginError =
+document.getElementById("loginError");
+
+function showLoginError(message){
+
+  loginError.textContent = message;
+  loginError.style.display = "block";
+}
+
+function hideLoginError(){
+
+  loginError.textContent = "";
+  loginError.style.display = "none";
+}
+
+emailInput.addEventListener("input", hideLoginError);
+passwordInput.addEventListener("input", hideLoginError);
+
 loginForm.addEventListener(
   "submit",
   async function(e){
@@ -282,10 +317,17 @@ loginForm.addEventListener(
     e.preventDefault();
 
     const email =
-      document.getElementById("email").value;
+      emailInput.value.trim();
 
     const password =
-      document.getElementById("password").value;
+      passwordInput.value;
+
+    if(!email){
+
+      showLoginError("Please enter your email address.");
+      emailInput.focus();
+      return;
+    }
 
     try{
 
@@ -309,9 +351,17 @@ loginForm.addEventListener(
 
       const data =
         await response.json();
-        console.log(data);
+      if(data.message === "User not found"){
 
-  //    alert(data.message);
+        showLoginError("User not found. Please register first.");
+        return;
+      }
+
+      if(data.message === "Invalid Password"){
+
+        showLoginError("Incorrect password.");
+        return;
+      }
 
      if(data.message === "Login Successful"){
 
@@ -344,11 +394,8 @@ loginForm.addEventListener(
 
     catch(error){
 
-      alert(
-        "Cannot connect to server"
-      );
-
       console.log(error);
+      showLoginError("Cannot connect to server. Please try again.");
     }
 
 });
