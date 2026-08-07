@@ -136,6 +136,8 @@
       opacity:0.95;
     }
 
+    .login-btn:disabled{ cursor:not-allowed; opacity:.7; transform:none; }
+
     .admin-btn{
 
       display:block;
@@ -294,6 +296,11 @@ document.getElementById("password");
 
 const loginError =
 document.getElementById("loginError");
+const loginButton = loginForm.querySelector("button[type='submit']");
+let loginPending = false;
+
+// Start waking a sleeping Render instance while the visitor is entering details.
+apiFetch("/api/health", { cache: "no-store" }, 15000).catch(() => {});
 
 function showLoginError(message){
 
@@ -315,6 +322,7 @@ loginForm.addEventListener(
   async function(e){
 
     e.preventDefault();
+    if(loginPending) return;
 
     const email =
       emailInput.value.trim();
@@ -329,11 +337,15 @@ loginForm.addEventListener(
       return;
     }
 
+    loginPending = true;
+    loginButton.disabled = true;
+    loginButton.textContent = "Signing in…";
+
     try{
 
       const response =
-        await fetch(
-          "http://localhost:5000/login",
+        await apiFetch(
+          "/login",
           {
             method:"POST",
 
@@ -349,8 +361,11 @@ loginForm.addEventListener(
           }
         );
 
-      const data =
-        await response.json();
+      const data = await response.json().catch(() => ({}));
+      if(!response.ok){
+        showLoginError(data.message || "Unable to sign in. Please try again.");
+        return;
+      }
       if(data.message === "User not found"){
 
         showLoginError("User not found. Please register first.");
@@ -395,7 +410,12 @@ loginForm.addEventListener(
     catch(error){
 
       console.log(error);
-      showLoginError("Cannot connect to server. Please try again.");
+      showLoginError(error.name === "AbortError" ? "The server is taking too long to respond. Please try again." : "Cannot connect to server. Please try again.");
+    }
+    finally{
+      loginPending = false;
+      loginButton.disabled = false;
+      loginButton.textContent = "User Login";
     }
 
 });

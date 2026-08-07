@@ -14,8 +14,20 @@ const Feedback = require("./models/Feedback");
 // const Setting = require("./models/setting");
 
 const app = express();
+const allowedOrigins = [
+    "https://majestic-buttercream-ebf9a3.netlify.app",
+    "http://localhost:5000",
+    "http://127.0.0.1:5000"
+];
 
-app.use(cors());
+app.use(cors({
+    origin(origin, callback) {
+        // Requests from the static site and non-browser clients have no Origin header.
+        if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
+        return callback(new Error("Origin not allowed by CORS"));
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+}));
 app.use(express.json());
 //const path = require("path");
 
@@ -45,8 +57,28 @@ const mongoose = require("mongoose");
 const Setting = require("./models/setting"); // Import model
 
 const mongoUri = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/mindwell";
+let databaseReady = false;
+let databaseError = null;
 
-mongoose.connect(mongoUri)
+mongoose.connection.on("connected", () => {
+    databaseReady = true;
+    databaseError = null;
+    console.log("MongoDB Connected");
+});
+mongoose.connection.on("disconnected", () => { databaseReady = false; });
+mongoose.connection.on("error", (error) => {
+    databaseReady = false;
+    databaseError = error;
+    console.error("MongoDB connection error:", error.message);
+});
+
+const databaseConnection = mongoose.connect(mongoUri, {
+    serverSelectionTimeoutMS: 10000,
+    connectTimeoutMS: 10000,
+    maxPoolSize: 10
+});
+
+databaseConnection
 .then(async () => {
 
     console.log("MongoDB Connected");
@@ -82,7 +114,7 @@ mongoose.connect(mongoUri)
 
 })
 .catch((err) => {
-    console.log(err);
+    console.error("MongoDB startup connection failed:", err.message);
 });
 
 
@@ -119,7 +151,26 @@ async function createAdmin(){
 
 }
 
-createAdmin();
+databaseConnection.then(createAdmin).catch((error) => {
+    console.error("Default admin setup skipped:", error.message);
+});
+
+app.get("/api/health", (req, res) => {
+    res.status(databaseReady ? 200 : 503).json({
+        status: databaseReady ? "ok" : "starting",
+        database: databaseReady ? "connected" : "disconnected",
+        error: databaseError ? databaseError.message : undefined
+    });
+});
+
+// Fail fast while MongoDB is unavailable instead of buffering requests for minutes.
+app.use((req, res, next) => {
+    if (req.path === "/api/health" || req.path === "/") return next();
+    if (!databaseReady) {
+        return res.status(503).json({ message: "Service is starting. Please try again in a moment." });
+    }
+    next();
+});
 
 // Home Route
 app.get("/", (req, res) => {
@@ -132,6 +183,7 @@ app.post("/register", async (req, res) => {
     try {
 
         const { name, email, password } = req.body;
+        const normalizedEmail = email && email.trim().toLowerCase();
 
         // Check if all fields exist
         if (!name || !email || !password) {
@@ -142,7 +194,7 @@ app.post("/register", async (req, res) => {
 
         // Check existing user
         const existingUser =
-            await User.findOne({ email });
+            await User.findOne({ email: normalizedEmail });
 
         if (existingUser) {
             return res.json({
@@ -157,7 +209,7 @@ app.post("/register", async (req, res) => {
         // Create new user
         const user = new User({
             name,
-            email,
+            email: normalizedEmail,
             password: hashedPassword
         });
 
@@ -182,10 +234,11 @@ app.post("/register", async (req, res) => {
 
 // Login Route
 app.post("/login", async (req, res) => {
-
+ try {
     const { email, password } = req.body;
+    if (!email || !password) return res.status(400).json({ message: "Email and password are required" });
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: email.trim().toLowerCase() });
 
     if (!user) {
         return res.json({
@@ -212,6 +265,10 @@ app.post("/login", async (req, res) => {
             email: user.email
         }
     });
+ } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).json({ message: "Server Error" });
+ }
 
 });
 

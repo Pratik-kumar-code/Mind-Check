@@ -217,7 +217,7 @@ else {
 if (data.profileImage && data.profileImage !== "") {
 
     document.getElementById("adminImage").src =
-        "http://localhost:5000" + data.profileImage;
+        API_BASE_URL + data.profileImage;
 
 }
 

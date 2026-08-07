@@ -125,6 +125,7 @@
       transform:scale(1.02);
       opacity:0.95;
     }
+    .register-btn:disabled{ cursor:not-allowed; opacity:.7; transform:none; }
 
     .login-text{
 
@@ -271,12 +272,18 @@
 
 const registerForm =
 document.getElementById("registerForm");
+const registerButton = registerForm.querySelector("button[type='submit']");
+let registerPending = false;
+
+// Start waking a sleeping Render instance while the visitor completes the form.
+apiFetch("/api/health", { cache: "no-store" }, 15000).catch(() => {});
 
 registerForm.addEventListener(
   "submit",
   async function(e){
 
     e.preventDefault();
+    if(registerPending) return;
 
     const name =
       document.getElementById(
@@ -307,11 +314,15 @@ registerForm.addEventListener(
       return;
     }
 
+    registerPending = true;
+    registerButton.disabled = true;
+    registerButton.textContent = "Creating account…";
+
     try{
 
       const response =
-        await fetch(
-          "http://localhost:5000/register",
+        await apiFetch(
+          "/register",
           {
             method:"POST",
 
@@ -328,17 +339,17 @@ registerForm.addEventListener(
           }
         );
 
-      const data =
-        await response.json();
+      const data = await response.json().catch(() => ({}));
+
+      if(!response.ok){
+        alert(data.message || "Unable to register. Please try again.");
+        return;
+      }
 
       alert(data.message);
 
      if(data.message === "Registration Successful"){
-    registerForm.reset();
-    window.location.href = "login.html";
-}
-      {
-
+        registerForm.reset();
         window.location.href =
           "login.html";
       }
@@ -352,6 +363,11 @@ registerForm.addEventListener(
       );
 
       console.log(error);
+    }
+    finally{
+      registerPending = false;
+      registerButton.disabled = false;
+      registerButton.textContent = "Register";
     }
 
 });
