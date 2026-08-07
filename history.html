@@ -1,28 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <script src="api-config.js"></script>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assessment History</title>
 
     <style>
 
+        :root{
+            --bg-color:#f8f7f2;
+            --card-bg:#fffefb;
+            --text-main:#2d3436;
+            --accent-green:#96b3a2;
+            --border-color:#e0e0e0;
+            --shadow:0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI',Tahoma,sans-serif;
+        }
+
         body{
-            font-family:Arial;
-            background:#f4f7f8;
-            padding:30px;
+            background:var(--bg-color);
+            color:var(--text-main);
+        }
+
+        header{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:15px 40px;
+            background:var(--card-bg);
+            border-bottom:1px solid var(--border-color);
+            box-shadow:var(--shadow);
+        }
+
+        .logo{
+            font-size:24px;
+            font-weight:bold;
+            color:var(--accent-green);
+        }
+
+        nav a{
+            margin:0 12px;
+            text-decoration:none;
+            color:var(--text-main);
+            font-weight:500;
+        }
+
+        nav a.active{
+            background:var(--accent-green);
+            color:white;
+            padding:8px 15px;
+            border-radius:8px;
+        }
+
+        .container{
+            max-width:1000px;
+            margin:40px auto;
+            padding:20px;
         }
 
         h1{
-            color:#4a6d5a;
+            color:var(--text-main);
+            margin-bottom:20px;
         }
 
         .card{
-            background:white;
+            background:var(--card-bg);
             padding:20px;
             margin-top:20px;
             border-radius:15px;
-            box-shadow:0 4px 10px rgba(0,0,0,0.1);
+            box-shadow:var(--shadow);
+            border:1px solid var(--border-color);
         }
 
         p{
@@ -60,9 +114,28 @@
 
 <body>
 
+<header>
+
+  <div class="logo">
+    &#127807; MindWell
+  </div>
+
+  <nav>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="journal.html">Journal</a>
+    <a href="resources.html">Resources</a>
+    <a href="profile.html">Profile</a>
+  </nav>
+
+</header>
+
+<main class="container">
+
     <h1>📊 Assessment History</h1>
 
     <div id="historyContainer"></div>
+
+</main>
 
 <script>
 
