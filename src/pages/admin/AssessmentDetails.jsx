@@ -1,0 +1,1 @@
+export { AssessmentDetails as default } from './AdminPages';

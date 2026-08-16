@@ -1,5 +1,24 @@
 {
+  "name": "mindwell-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:backend": "npm --prefix backend start",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
   "dependencies": {
-    "multer": "^2.2.0"
+    "chart.js": "^4.4.7",
+    "jspdf": "^4.2.1",
+    "react": "^18.3.1",
+    "react-chartjs-2": "^5.3.0",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.10"
   }
 }
